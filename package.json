@@ -1,0 +1,25 @@
+{
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "name": "projeto-pi-fatec",
+  "description": "Gestão de vendas - Maracuja Design",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LucasFelipeJesus/Projeto-PI-FATEC.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LucasFelipeJesus/Projeto-PI-FATEC/issues"
+  },
+  "homepage": "https://github.com/LucasFelipeJesus/Projeto-PI-FATEC#readme"
+}
