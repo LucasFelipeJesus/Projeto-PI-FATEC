@@ -19,6 +19,6 @@ export const getAllClient = () => {
 }
 
 export const dbCliente = [
-    new Contato(1,"TemplateNome", "TemplateCPF", "TemplateTelefone", "TemplateCEP", "TemplateEstado", "TemplateCidade", "TemplateBairro", "TemplateEndereco", "TemplateComplemento", "TemplateEmail"),
-    new Contato(1,"Teste Cliente", "10159951530", "38833885", "12345543", "São Paulo", "São Paulo", "Sapopemba", "Aricanduva, 499", "", "email@gmail.com"),
+    new Cliente(1,"TemplateNome", "TemplateCPF", "TemplateTelefone", "TemplateCEP", "TemplateEstado", "TemplateCidade", "TemplateBairro", "TemplateEndereco", "TemplateComplemento", "TemplateEmail"),
+    new Cliente(2,"Teste Cliente", "10159951530", "38833885", "12345543", "São Paulo", "São Paulo", "Sapopemba", "Aricanduva, 499", "", "email@gmail.com")
 ]
