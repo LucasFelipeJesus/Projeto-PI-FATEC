@@ -14,7 +14,13 @@ export class Fornecedor {
     }
 }
 
-export const getAllFornecedor = () => {
+export const create = (Fornecedor) => {
+    contato.id = dbFornecedor.lenght + 1
+    dbFornecedor.push(Fornecedor)
+    return Fornecedor
+}
+)
+export const findAllFornecedor = () => {
     return dbFornecedor
 }
 
