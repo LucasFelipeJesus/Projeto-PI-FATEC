@@ -14,6 +14,15 @@ export class Cliente {
     }
 }
 
+let idAtual = 2
+
+export const create = (cliente) => {
+    idAtual++
+    cliente.id = idAtual
+    dbCliente.push(cliente)
+    return cliente
+}
+
 export const getAllClient = () => {
     return dbCliente
 }
