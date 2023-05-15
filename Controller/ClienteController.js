@@ -1,4 +1,4 @@
-import { Cliente, getAllClient } from "../Models/ClienteModel.js"
+import { Cliente, createModelCliente, getAllClient } from "../Models/ClienteModel.js"
 
 class ClienteController {
     static getClients(req,res){
@@ -13,7 +13,7 @@ class ClienteController {
         }
         
         const cliente = new Cliente (0, nome, cpf, telefone, cep, estado, cidade, bairro, endereco, complemento, email)
-        const createdCliente = create(cliente)
+        const createdCliente = createModelCliente(cliente)
         res.status(201).json(createdCliente)
     }
 

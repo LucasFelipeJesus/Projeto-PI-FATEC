@@ -12,7 +12,7 @@ export class Produto {
 
 let idAtual = 9
 
-export const create = (produto) => {
+export const createModelProduto = (produto) => {
     idAtual++
     produto.id = idAtual
     dbProduto.push(produto)

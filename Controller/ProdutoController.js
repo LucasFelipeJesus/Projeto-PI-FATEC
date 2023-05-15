@@ -1,4 +1,4 @@
-import { Produto, getAllProduct } from "../Models/ProdutoModel.js"
+import { Produto, createModelProduto, getAllProduct } from "../Models/ProdutoModel.js"
 
 class ProdutoController {
     static getProduct(req, res) {
@@ -13,7 +13,7 @@ class ProdutoController {
         }
         
         const produto = new Produto(0, nome, cpf, telefone, cep, estado, cidade, bairro, endereco, complemento, email)
-        const createdProduto = create(produto)
+        const createdProduto = createModelProduto(produto)
         res.status(201).json(createdProduto)
     }
 

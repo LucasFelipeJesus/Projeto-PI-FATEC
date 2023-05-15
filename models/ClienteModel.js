@@ -16,7 +16,7 @@ export class Cliente {
 
 let idAtual = 2
 
-export const create = (cliente) => {
+export const createModelCliente = (cliente) => {
     idAtual++
     cliente.id = idAtual
     dbCliente.push(cliente)
