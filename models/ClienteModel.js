@@ -19,6 +19,7 @@ let idAtual = 2
 export const createModelCliente = (cliente) => {
     idAtual++
     cliente.id = idAtual
+    if(!cliente.complemento) cliente.complemento = ""
     dbCliente.push(cliente)
     return cliente
 }
