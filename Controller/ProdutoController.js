@@ -12,7 +12,7 @@ class ProdutoController {
             return
         }
         
-        const produto = new Produto(0, nome, cpf, telefone, cep, estado, cidade, bairro, endereco, complemento, email)
+        const produto = new Produto(0, descricao, fichaTecnica, unidadeMedida, tipoProduto, valorEntrada, valorVenda)
         const createdProduto = createModelProduto(produto)
         res.status(201).json(createdProduto)
     }
