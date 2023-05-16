@@ -19,6 +19,10 @@ export const createModelProduto = (produto) => {
     return produto
 }
 
+export const findProdutoByPk = (id) => {
+    return dbProduto.find(produto => produto.id === id)
+}
+
 export const getAllProduct = () => {
     return dbProduto
 }

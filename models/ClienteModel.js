@@ -24,6 +24,10 @@ export const createModelCliente = (cliente) => {
     return cliente
 }
 
+export const findClienteByPk = (id) => {
+    return dbCliente.find(cliente => cliente.id === id)
+}
+
 export const getAllClient = () => {
     return dbCliente
 }

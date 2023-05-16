@@ -5,6 +5,8 @@ class ClienteController {
         res.json(getAllClient())
     }
 
+    //getById - função findById
+
     static createCliente(req, res){
         const {nome, cpf, telefone, cep, estado, cidade, bairro, endereco, complemento, email} = req.body
         if(!nome || !cpf || !telefone || !cep || !estado || !cidade || !bairro || !endereco || !email){
@@ -17,6 +19,7 @@ class ClienteController {
         res.status(201).json(createdCliente)
     }
 
+    //getById
 }
 
 export default ClienteController
