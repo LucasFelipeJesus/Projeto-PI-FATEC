@@ -27,6 +27,16 @@ export const getAllProduct = () => {
     return dbProduto
 }
 
+export const destroyProduct = (id) => {
+    const produto = findProdutoByPk(id)
+    if(!produto){
+        return false
+    }
+    const index = dbProduto.indexOf(produto)
+    dbProduto.splice(index, 1)
+    return true
+}
+
 export const dbProduto = [
     
     new Produto (1, "TemplateDescriçao", "TemplateFichaTecnica", "TemplateUnidadeMedida", "TemplateTipoProduto", 9.99, 99.99),

@@ -32,6 +32,16 @@ export const getAllClient = () => {
     return dbCliente
 }
 
+export const destroyClient = (id) => {
+    const cliente = findClienteByPk(id)
+    if(!cliente){
+        return false
+    }
+    const index = dbCliente.indexOf(cliente)
+    dbCliente.splice(index, 1)
+    return true
+}
+
 export const dbCliente = [
     new Cliente(1,"TemplateNome", "TemplateCPF", "TemplateTelefone", "TemplateCEP", "TemplateEstado", "TemplateCidade", "TemplateBairro", "TemplateEndereco", "TemplateComplemento", "TemplateEmail"),
     new Cliente(2,"Teste Cliente", "10159951530", "38833885", "12345543", "São Paulo", "São Paulo", "Sapopemba", "Aricanduva, 499", "", "email@gmail.com")

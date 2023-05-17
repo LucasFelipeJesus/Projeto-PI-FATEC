@@ -1,4 +1,4 @@
-import { Produto, findProdutoByPk, createModelProduto, getAllProduct } from "../Models/ProdutoModel.js"
+import { Produto, findProdutoByPk, createModelProduto, destroyProduct, getAllProduct } from "../Models/ProdutoModel.js"
 
 class ProdutoController {
     static getProduct(req, res) {
@@ -24,6 +24,17 @@ class ProdutoController {
             return
         }
         res.status(200).json(produto)
+    }
+
+    static destroyProduto(req,res){
+        const id = parseInt(req.params.id)
+        const produto = findProdutoByPk(id)
+        if(!produto){
+            res.status(404).json({error: "Não encontrado."})
+            return
+        }
+        destroyProduct(id)
+        res.json({message: "Removido com sucesso!"})
     }
 }
 

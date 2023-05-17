@@ -1,18 +1,9 @@
-import { Cliente, findClienteByPk, createModelCliente, getAllClient } from "../Models/ClienteModel.js"
+import { Cliente, findClienteByPk, createModelCliente, destroyClient, getAllClient } from "../Models/ClienteModel.js"
 
 class ClienteController {
     static getClients(req,res){
         res.json(getAllClient())
     }
-
-    /*searchById(req) {
-        const id = parseInt(req.params.id)
-        const cliente = findClienteByPk(id)
-        if(!cliente){
-            res.status(404).json({error: "Não encontrado."})
-            return
-        }
-    }*/
 
     static createCliente(req, res){
         const {nome, cpf, telefone, cep, estado, cidade, bairro, endereco, complemento, email} = req.body
@@ -33,6 +24,17 @@ class ClienteController {
             return
         }
         res.status(200).json(cliente)
+    }
+
+    static destroyCliente(req,res){
+        const id = parseInt(req.params.id)
+        const cliente = findClienteByPk(id)
+        if(!cliente){
+            res.status(404).json({error: "Não encontrado."})
+            return
+        }
+        destroyClient(id)
+        res.json({message: "Removido com sucesso!"})
     }
 }
 
