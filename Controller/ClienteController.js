@@ -18,7 +18,8 @@ class ClienteController {
     }
 
     static getClienteById(req, res){
-        const cliente = searchById(req)
+        const id = parseInt(req.params.id)
+        const cliente = findClienteByPk(id)
         if(!cliente){
             res.status(404).json({error: "Não encontrado."})
             return
@@ -36,12 +37,6 @@ class ClienteController {
         destroyClient(id)
         res.json({message: "Removido com sucesso!"})
     }
-}
-
-function searchById(req) {
-    const id = parseInt(req.params.id)
-    const cliente = findClienteByPk(id)
-    return cliente
 }
 
 export default ClienteController

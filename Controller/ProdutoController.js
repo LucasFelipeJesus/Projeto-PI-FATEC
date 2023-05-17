@@ -18,7 +18,8 @@ class ProdutoController {
     }
 
     static getProdutoById(req, res){
-        const produto = searchById(req)
+        const id = parseInt(req.params.id)
+        const produto = findProdutoByPk(id)
         if(!produto){
             res.status(404).json({error: "Não encontrado."})
             return
@@ -36,12 +37,6 @@ class ProdutoController {
         destroyProduct(id)
         res.json({message: "Removido com sucesso!"})
     }
-}
-
-function searchById(req) {
-    const id = parseInt(req.params.id)
-    const produto = findProdutoByPk(id)
-    return produto
 }
 
 export default ProdutoController
