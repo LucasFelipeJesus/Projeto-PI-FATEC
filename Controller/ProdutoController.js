@@ -1,4 +1,4 @@
-import { Produto, createModelProduto, getAllProduct } from "../Models/ProdutoModel.js"
+import { Produto, findProdutoByPk, createModelProduto, getAllProduct } from "../Models/ProdutoModel.js"
 
 class ProdutoController {
     static getProduct(req, res) {
@@ -17,6 +17,20 @@ class ProdutoController {
         res.status(201).json(createdProduto)
     }
 
+    static getProdutoById(req, res){
+        const produto = searchById(req)
+        if(!produto){
+            res.status(404).json({error: "Não encontrado."})
+            return
+        }
+        res.status(200).json(produto)
+    }
+}
+
+function searchById(req) {
+    const id = parseInt(req.params.id)
+    const produto = findProdutoByPk(id)
+    return produto
 }
 
 export default ProdutoController
