@@ -1,7 +1,7 @@
 export class Vendas {
   constructor(
-    idpedido,
-    idcliente,
+    idPedido,
+    idCliente,
     nome,
     cpf,
     telefone,
@@ -10,8 +10,8 @@ export class Vendas {
     totalPedido,
     formaPagamento
   ) {
-    this.idpedido = idpedido;
-    this.idcliente = idcliente;
+    this.idPedido = idPedido;
+    this.idCliente = idCliente;
     this.nome = nome;
     this.cpf = cpf;
     this.telefone = telefone;
@@ -22,7 +22,37 @@ export class Vendas {
   }
 }
 
-export const getAllVendas = () => {
+export const update = (idPedido, pedidoVenda) => {
+  const vendasToUpdate = findByPk(idPedido);
+  if (!vendasToUpdate) {
+    return false;
+  }
+
+  const index = dbVendas.indexOf(vendasToUpdate);
+  dbVendas[index] = pedidoVenda;
+  return true;
+};
+
+export const destroy = (idPedido) => {
+  const pedidoVenda = findByPk(idPedido);
+  if (!pedidoVenda) {
+    return false;
+  }
+  const index = dbVendas.indexOf(pedidoVenda);
+  dbVendas.splice(index, 1);
+  return true;
+};
+
+export const findByPk = (idPedido) => {
+  return dbVendas.find((pedidoVenda) => pedidoVenda.idPedido === idPedido);
+};
+
+export const create = (pedidoVenda) => {
+  pedidoVenda.id = dbVendas.length + 1;
+  dbVendas.push(pedidoVenda);
+};
+
+export const findAllVendas = () => {
   return dbVendas;
 };
 
