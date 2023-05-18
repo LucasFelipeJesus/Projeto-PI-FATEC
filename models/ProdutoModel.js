@@ -4,7 +4,7 @@ export class Produto {
         this.descricao = descricao
         this.fichaTecnica = fichaTecnica
         this.unidadeMedida = unidadeMedida
-        this. tipoProduto = tipoProduto
+        this.tipoProduto = tipoProduto
         this.valorEntrada = Number(valorEntrada)
         this.valorVenda = Number(valorVenda)
     }
@@ -34,6 +34,16 @@ export const destroyProduct = (id) => {
     }
     const index = dbProduto.indexOf(produto)
     dbProduto.splice(index, 1)
+    return true
+}
+
+export const updateProduct = (id, produtoUpdate) => {
+    const produto = findProdutoByPk(id)
+    if(!produto) {
+        return false
+    }
+    const index = dbProduto.indexOf(produto)
+    dbProduto[index] = produtoUpdate
     return true
 }
 
