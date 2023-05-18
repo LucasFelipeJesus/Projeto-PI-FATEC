@@ -20,5 +20,6 @@
   "homepage": "https://github.com/LucasFelipeJesus/Projeto-PI-FATEC#readme",
   "dependencies": {
     "express": "^4.18.2"
-  }
+  },
+  "devDependencies": {}
 }
