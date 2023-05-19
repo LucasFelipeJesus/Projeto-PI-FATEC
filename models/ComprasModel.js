@@ -25,7 +25,27 @@ export class Compras {
 export const getAllCompras = () => {
     return dbCompras
 }
+export const findByPk = (idpedido) => {
+    return dbCompras.find((Compras) => Compras.idpedido === idpedido)
+}
 
+export const create = (compras) => {
+    Compras.idpedido = dbCompras.length + 1
+    dbCompras.push(compras)
+}
+export const update = (idpedido, compras) => {
+    const contatoToUpdate = findByPk(id)
+    if (!contatoToUpdate) {
+        return false
+    }
+
+    const index = dbContato.indexOf(contatoToUpdate)
+    dbContato[index] = contato
+    return true
+}
+export const findAll = () => {
+    return dbCompras
+}
 export const dbCompras = [
     new Compras(
         1,
