@@ -18,7 +18,7 @@ class FornecedorController {
             return
         }
 
-        const Fornecedor = new Fernecedor(0,nome,email,telefone)
+        const fornecedor = new Fornecedor(0,nome,email,telefone)
         create(Fornecedor)
         res.json(Fornecedor)
     }
