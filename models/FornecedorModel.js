@@ -19,7 +19,7 @@ export const create = (Fornecedor) => {
     dbFornecedor.push(Fornecedor)
     return Fornecedor
 }
-)
+
 export const findAllFornecedor = () => {
     return dbFornecedor
 }
