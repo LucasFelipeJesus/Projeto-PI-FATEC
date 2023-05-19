@@ -1,6 +1,6 @@
 export class DetVendas {
   constructor(
-    idpedido,
+    idPedido,
     idProduto,
     descricaoProduto,
     quantidade,
@@ -8,7 +8,7 @@ export class DetVendas {
     valorUnitario,
     valorTotal
   ) {
-    this.idpedido = idpedido;
+    this.idpedido = idPedido;
     this.idProduto = idProduto;
     this.descricaoProduto = descricaoProduto;
     this.quantidade = quantidade;
@@ -18,7 +18,39 @@ export class DetVendas {
   }
 }
 
-export const getAllDetVendas = () => {
+export const update = (idPedido, detPedidoVenda) => {
+  const detVendaToUpdate = findByPk(idPedido);
+  if (!detVendaToUpdate) {
+    return false;
+  }
+
+  const index = dbDetVendas.indexOf(detVendaToUpdate);
+  dbDetVendas[index] = detPedidoVenda;
+  return true;
+};
+
+export const destroy = (idPedido) => {
+  const detPedidoVenda = findByPk(idPedido);
+  if (!detPedidoVenda) {
+    return false;
+  }
+  const index = dbDetVendas.indexOf(detPedidoVenda);
+  dbDetVendas.splice(index, 1);
+  return true;
+};
+
+export const findByPk = (idPedido) => {
+  return dbDetVendas.find(
+    (detPedidoVenda) => detPedidoVenda.idPedido === idPedido
+  );
+};
+
+export const create = (detPedidoVenda) => {
+  detPedidoVenda.id = dbDetVendas.length + 1;
+  dbDetVendas.push(detPedidoVenda);
+};
+
+export const findAllDetVendas = () => {
   return dbDetVendas;
 };
 

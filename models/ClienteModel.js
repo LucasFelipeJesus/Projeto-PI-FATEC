@@ -14,8 +14,42 @@ export class Cliente {
     }
 }
 
+let idAtual = 2
+
+export const createModelCliente = (cliente) => {
+    idAtual++
+    cliente.id = idAtual
+    if(!cliente.complemento) cliente.complemento = ""
+    dbCliente.push(cliente)
+    return cliente
+}
+
+export const findClienteByPk = (id) => {
+    return dbCliente.find(cliente => cliente.id === id)
+}
+
 export const getAllClient = () => {
     return dbCliente
+}
+
+export const destroyClient = (id) => {
+    const cliente = findClienteByPk(id)
+    if(!cliente){
+        return false
+    }
+    const index = dbCliente.indexOf(cliente)
+    dbCliente.splice(index, 1)
+    return true
+}
+
+export const updateClient = (id, clienteUpdate) => {
+    const cliente = findClienteByPk(id)
+    if(!cliente) {
+        return false
+    }
+    const index = dbCliente.indexOf(cliente)
+    dbCliente[index] = clienteUpdate
+    return true
 }
 
 export const dbCliente = [
