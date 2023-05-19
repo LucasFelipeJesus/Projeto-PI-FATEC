@@ -1,3 +1,5 @@
+import { dbCompras } from "./ComprasModel"
+
 export class DetCompras {
     constructor(
         idpedido,
@@ -20,6 +22,35 @@ export class DetCompras {
 
 export const getAllDetCompras = () => {
     return dbDetCompras
+}
+
+export const createModelDetCompras = (detCompra) => {
+    dbCompras.push(detCompra)
+    return compra
+}
+
+export const findDetComprasByPk = (idpedido) => {
+    return dbCompras.find((detCompra) => detCompra.idpedido === idpedido)
+}
+
+export const destroyDetCompras = (idpedido) => {
+    const detCompra = findDetComprasByPk(idpedido)
+    if (!detCompra) {
+        return false
+    }
+    const index = dbCompras.indexOf(detCompra)
+    dbCompras.splice(index, 1)
+    return true
+}
+
+export const updateDetCompras = (idpedido, detCompraUpdate) => {
+    const detCompra = findDetComprasByPk(idpedido)
+    if (!detCompra) {
+        return false
+    }
+    const index = dbCompras.indexOf(detCompra)
+    dbCompras[index] = detCompraUpdate
+    return true
 }
 
 export const dbDetCompras = [
