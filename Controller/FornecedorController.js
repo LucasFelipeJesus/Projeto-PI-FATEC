@@ -27,7 +27,7 @@ static getFornecedorById(req, res) {
     res.json(Fornecedor)
 }
 
-static destroyFornecedor(res, res) {
+static destroyFornecedor(req, res) {
     const id = parseInt(req.params.id)
     const Fornecedor = findByPk(id)
     if(!Fornecedor) {

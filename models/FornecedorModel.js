@@ -52,4 +52,3 @@ export const dbFornecedor = [
     new Fornecedor('Empresa1', '1290392838392', '9999999999', '988888888', 'SP', 'Indaiatuba', 'Jardim', 'Av da Empresa', '33', 'empresa1@email.com'),
 ]
 
-nome, cnpj, telefone, cep, estado, cidade, bairro, endereco, complemento, emai
