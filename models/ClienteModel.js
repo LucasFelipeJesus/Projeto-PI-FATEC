@@ -1,58 +1,53 @@
-export class Cliente {
-    constructor(id, nome, cpf, telefone, cep, estado, cidade, bairro, endereco, complemento, email){
-        this.id = id
-        this.nome = nome
-        this.cpf = cpf
-        this.telefone = telefone
-        this.cep = cep
-        this.estado = estado
-        this.cidade = cidade
-        this.bairro = bairro
-        this.endereco = endereco
-        this.complemento = complemento
-        this.email = email
+import { Sequelize } from "sequelize"
+import db from "../db.js"
+
+const Cliente = db.define('cliente',{
+    id: {
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        primaryKey: true
+    },
+    nome: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    cpf: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    telefone: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    cep: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    estado: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    cidade: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    bairro: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    endereco: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    complemento: {
+        type: Sequelize.STRING,
+        allowNull: true
+    },
+    email:{
+        type: Sequelize.STRING,
+        allowNull: false
     }
-}
+    
+})
 
-let idAtual = 2
-
-export const createModelCliente = (cliente) => {
-    idAtual++
-    cliente.id = idAtual
-    if(!cliente.complemento) cliente.complemento = ""
-    dbCliente.push(cliente)
-    return cliente
-}
-
-export const findClienteByPk = (id) => {
-    return dbCliente.find(cliente => cliente.id === id)
-}
-
-export const getAllClient = () => {
-    return dbCliente
-}
-
-export const destroyClient = (id) => {
-    const cliente = findClienteByPk(id)
-    if(!cliente){
-        return false
-    }
-    const index = dbCliente.indexOf(cliente)
-    dbCliente.splice(index, 1)
-    return true
-}
-
-export const updateClient = (id, clienteUpdate) => {
-    const cliente = findClienteByPk(id)
-    if(!cliente) {
-        return false
-    }
-    const index = dbCliente.indexOf(cliente)
-    dbCliente[index] = clienteUpdate
-    return true
-}
-
-export const dbCliente = [
-    new Cliente(1,"TemplateNome", "TemplateCPF", "TemplateTelefone", "TemplateCEP", "TemplateEstado", "TemplateCidade", "TemplateBairro", "TemplateEndereco", "TemplateComplemento", "TemplateEmail"),
-    new Cliente(2,"Teste Cliente", "10159951530", "38833885", "12345543", "São Paulo", "São Paulo", "Sapopemba", "Aricanduva, 499", "", "email@gmail.com")
-]
+export default Cliente
