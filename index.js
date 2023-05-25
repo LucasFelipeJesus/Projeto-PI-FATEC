@@ -7,6 +7,7 @@ import ComprasRouter from "./Routes/ComprasRoute.js"
 import DetComprasRouter from "./Routes/DetComprasRoute.js"
 import VendasRouter from "./Routes/VendasRoute.js"
 import DetVendasRouter from "./Routes/DetVendasRoute.js"
+import FornecedorRouter from "./Routes/FornecedorRoute.js"
 
 const app = express()
 app.use(express.json())
@@ -19,6 +20,7 @@ app.use("/Compras", ComprasRouter)
 app.use("/DetalhesCompras", DetComprasRouter)
 app.use("/Vendas", VendasRouter)
 app.use("/DetalhesVendas", DetVendasRouter)
+app.use("/Fornecedor", FornecedorRouter)
 
 const port = process.env.PORT || 3000
 

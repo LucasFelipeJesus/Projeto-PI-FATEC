@@ -14,17 +14,41 @@ export class Fornecedor {
     }
 }
 
-export const create = (Fornecedor) => {
-    contato.id = dbFornecedor.lenght + 1
-    dbFornecedor.push(Fornecedor)
-    return Fornecedor
+export const update = (id, contato) => {
+    const fornecedorToUpdate = findByPk(id)
+    if(!fornecedorToUpdade) {
+        return false
+    }
+
+    const index = dbFornecedor.indexOf(fornecedorToUpdate)
+    dbFornecedor[index] = Fornecedor
+    return true
 }
-)
-export const findAllFornecedor = () => {
+
+export const destroy = (id) => {
+    const Fornecedor = findByPk(id)
+    if(!Fornecedor) {
+        return false
+    }
+    const index = dbContato.indexOf(contato)
+    dbContato.splice(index, 1)
+    return true
+}
+
+export const findByPk = (id) => {
+    return dbFornecedor.find(Fornecedor => Fornecedor.id === id)
+}
+
+export const create = (Fornecedor) => {
+    Fornecedor.id = dbFornecedor.length + 1
+    dbFornecedor.push(Fornecedor)
+}
+
+export const findAll = () => {
     return dbFornecedor
 }
 
 export const dbFornecedor = [
-    new Fornecedor (1,"TemplateNome", "TemplateCPF", "TemplateTelefone", "TemplateCEP", "TemplateEstado", "TemplateCidade", "TemplateBairro", "TemplateEndereco", "TemplateComplemento", "TemplateEmail"),
-    new Fornecedor (2,"Teste Cliente", "10159951530", "38833885", "12345543", "São Paulo", "São Paulo", "Sapopemba", "Aricanduva, 499", "", "email@gmail.com")
+    new Fornecedor('Empresa1', '1290392838392', '9999999999', '988888888', 'SP', 'Indaiatuba', 'Jardim', 'Av da Empresa', '33', 'empresa1@email.com'),
 ]
+

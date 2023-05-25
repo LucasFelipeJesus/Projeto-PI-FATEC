@@ -4,5 +4,10 @@ import FornecedorController from '../Controller/FornecedorController.js'
 const FornecedorRouter = express.Router();
 
 FornecedorRouter.get('/', FornecedorController.getFornecedor)
+FornecedorRouter.post('/', FornecedorController.createFornecedor)
+FornecedorRouter.get('/:id', FornecedorController.getFornecedorById)
+FornecedorRouter.delete('/:id', FornecedorController.destroyFornecedor)
+FornecedorRouter.put('/:id', FornecedorController.updateFornecedor)
+
 
 export default FornecedorRouter
