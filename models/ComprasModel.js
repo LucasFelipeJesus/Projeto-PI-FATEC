@@ -1,4 +1,49 @@
-export class Compras {
+import { Sequelize } from "sequelize"
+import db from "../db.js"
+
+const Compras = db.define("Compras", {
+    idPedido: {
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+    },
+    idFornecedor: {
+        type: Sequelize.NUMBER,
+        allowNull: false,
+    },
+    nome: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
+    cnpj: {
+        type: Sequelize.NUMBER,
+        allowNull: false,
+    },
+    telefone: {
+        type: Sequelize.NUMBER,
+        allowNull: false,
+    },
+    dataPedido: {
+        type: Sequelize.DATE,
+        allowNull: false,
+    },
+    dataEntrega: {
+        type: Sequelize.DATE,
+        allowNull: false,
+    },
+    totalPedido: {
+        type: Sequelize.DECIMAL(10, 2),
+        allowNull: false,
+    },
+    formaPagamento: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
+})
+
+export default Compras
+
+/*export class Compras {
     constructor(
         idpedido,
         idfornecedor,
@@ -89,4 +134,4 @@ export const dbCompras = [
         "X.XXX Reais",
         "Debito"
     ),
-]
+]*/
