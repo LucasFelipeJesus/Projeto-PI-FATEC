@@ -54,7 +54,7 @@ class FornecedorController {
                 return
             }
     
-            const updatedFornecedor = await Fornecedor.update({nome, cnpj, telefone, cep, estado, cidade, bairro, endereco, complemento, email},{where: {id: contato.id}})
+            const updatedFornecedor = await Fornecedor.update({nome, cnpj, telefone, cep, estado, cidade, bairro, endereco, complemento, email},{where: {id: fornecedor.id}})
             res.json(updatedFornecedor)
         }
     }
