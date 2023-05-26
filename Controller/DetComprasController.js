@@ -1,4 +1,101 @@
-import { DetCompras, getAllDetCompras } from "../models/DetComprasModel.js"
+import detCompras from "../models/DetComprasModel"
+class detcomprasController {
+    static async getDetCompras(req, res) {
+        const detCompra = await detCompras.findAll()
+        res.json(detCompra)
+    }
+
+    static async procura(req, res) {}
+
+    static async createDetCompra(req, res) {
+        const {
+            descricaoProduto,
+            quantidade,
+            unidadeMedida,
+            valorUnitario,
+            valorTotal,
+        } = req.body
+        if (
+            !descricaoProduto ||
+            !quantidade ||
+            !unidadeMedida ||
+            !valorUnitario ||
+            !valorTotal
+        ) {
+            res.status(400).json({ error: "Todos campos são obrigatórios!!" })
+            return
+        }
+
+        const createdDetCompra = await detCompras.create(req.body)
+        res.status(201).json(createdDetCompra)
+    }
+
+    static async getdetCompraById(req, res) {
+        const idPedido = parseInt(req.params.idPedido)
+        const detCompra = await detCompras.findByPk(idPedido)
+        if (!detCompra) {
+            res.status(404).json({ error: "Detalhe de Compra Não encontrado." })
+            return
+        }
+        res.status(200).json(Compra)
+    }
+
+    static async destroydetCompra(req, res) {
+        const idPedido = parseInt(req.params.idPedido)
+        const detCompra = await detCompras.findByPk(idPedido)
+        if (!detCompra) {
+            res.status(404).json({
+                error: "Detalhes de Compra Não encontrado.",
+            })
+            return
+        }
+        await detCompra.destroy({ where: { idPedido: detCompra.idPedido } })
+        res.json({ message: "Detalhes de Compra Removido com sucesso!" })
+    }
+
+    static async updatedetCompra(req, res) {
+        const idPedido = parseInt(req.params.idPedido)
+        const detCompra = await detCompras.findByPk(idPedido)
+        if (!detCompra) {
+            res.status(404).json({ error: "Compra Não encontrada." })
+            return
+        }
+
+        const {
+            descricaoProduto,
+            quantidade,
+            unidadeMedida,
+            valorUnitario,
+            valorTotal,
+        } = req.body
+        if (
+            !descricaoProduto ||
+            !quantidade ||
+            !unidadeMedida ||
+            !valorUnitario ||
+            !valorTotal
+        ) {
+            res.status(400).json({ error: "Todos campos são obrigatórios!!" })
+            return
+        }
+
+        const updateddetCompra = await detCompras.update(
+            {
+                descricaoProduto,
+                quantidade,
+                unidadeMedida,
+                valorUnitario,
+                valorTotal,
+            },
+            { where: { idPedido: detCompras.idPedido } }
+        )
+        res.json(updateddetCompra)
+    }
+}
+
+export default detcomprasController
+
+/*import { DetCompras, getAllDetCompras } from "../models/DetComprasModel.js"
 
 class DetComprasController {
     static getDetCompra(req, res) {
@@ -97,4 +194,4 @@ class DetComprasController {
         res.json(detCompra)
     }
 }
-export default DetComprasController
+export default DetComprasController*/
