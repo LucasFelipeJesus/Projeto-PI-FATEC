@@ -8,7 +8,6 @@ import DetComprasRouter from "./Routes/DetComprasRoute.js"
 import VendasRouter from "./Routes/VendasRoute.js"
 import DetVendasRouter from "./Routes/DetVendasRoute.js"
 import FornecedorRouter from "./Routes/FornecedorRoute.js"
-import detcomprasController from "./Controller/DetComprasController.js"
 
 const app = express()
 app.use(express.json())
