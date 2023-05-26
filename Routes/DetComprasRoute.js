@@ -1,5 +1,5 @@
 import express from "express"
-import DetComprasController from "../Controller/DetComprasController.js"
+import detcomprasController from "../Controller/DetComprasController.js"
 
 const DetComprasRouter = express.Router()
 
