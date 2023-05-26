@@ -4,8 +4,8 @@ import db from "../db.js"
 const detCompras = db.define("detCompras", {
     idPedido: {
         type: Sequelize.INTEGER,
-        autoIncrement: true,
-        primaryKey: true,
+        autoIncrement: false,
+        primaryKey: false,
     },
     idProduto: {
         type: Sequelize.NUMBER,
