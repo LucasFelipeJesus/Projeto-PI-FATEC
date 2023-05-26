@@ -1,53 +1,55 @@
 import { Sequelize } from "sequelize"
 import db from "../db.js"
+import Compras from "../models/ComprasModel.js"
 
-const Fornecedor = db.define('fornecedor',{
+const Fornecedor = db.define("fornecedor", {
     id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
-        primaryKey: true
+        primaryKey: true,
     },
     nome: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
     },
-    cnpj: {
-        type: Sequelize.INTERGER,
-        allowNull: false
+    cpf: {
+        type: Sequelize.STRING,
+        allowNull: false,
     },
     telefone: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
     },
     cep: {
-        type: Sequelize.INTERGER,
-        allowNull: false
+        type: Sequelize.STRING,
+        allowNull: false,
     },
     estado: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
     },
     cidade: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
     },
     bairro: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
     },
     endereco: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
     },
     complemento: {
-        type: Sequelize.INTERGER,
-        allowNull: false
+        type: Sequelize.STRING,
+        allowNull: true,
     },
     email: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
     },
-    
 })
+
+Fornecedor.hasMany(Compras)
 
 export default Fornecedor
