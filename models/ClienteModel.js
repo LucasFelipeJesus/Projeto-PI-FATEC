@@ -1,6 +1,8 @@
 import { Sequelize } from "sequelize"
 import db from "../db.js"
 
+import Vendas from '../models/VendasModel.js'
+
 const Cliente = db.define('cliente',{
     id: {
         type: Sequelize.INTEGER,
@@ -49,5 +51,7 @@ const Cliente = db.define('cliente',{
     }
     
 })
+
+Cliente.hasMany(Vendas)
 
 export default Cliente

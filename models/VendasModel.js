@@ -1,3 +1,6 @@
+import Cliente from "../Models/ClienteModel.js"
+////
+
 export class Vendas {
     constructor(
         idPedido,
@@ -91,3 +94,6 @@ export const dbVendas = [
         "Debito"
     ),
 ]
+
+////
+Vendas.BelongsTo(Cliente, {constraints: true})
