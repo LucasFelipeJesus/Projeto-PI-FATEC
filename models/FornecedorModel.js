@@ -1,54 +1,55 @@
-export class Fornecedor {
-    constructor(id, nome, cnpj, telefone, cep, estado, cidade, bairro, endereco, complemento, email){
-        this.id = id
-        this.nome = nome
-        this.cnpj = cnpj
-        this.telefone = telefone
-        this.cep = cep
-        this.estado = estado
-        this.cidade = cidade
-        this.bairro = bairro
-        this.endereco = endereco
-        this.complemento = complemento
-        this.email = email
-    }
-}
+import { Sequelize } from "sequelize"
+import db from "../db.js"
+import Compras from "../models/ComprasModel.js"
 
-export const update = (id, contato) => {
-    const fornecedorToUpdate = findByPk(id)
-    if(!fornecedorToUpdade) {
-        return false
-    }
+const Fornecedor = db.define("fornecedor", {
+    id: {
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+    },
+    nome: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
+    cpf: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
+    telefone: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
+    cep: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
+    estado: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
+    cidade: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
+    bairro: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
+    endereco: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
+    complemento: {
+        type: Sequelize.STRING,
+        allowNull: true,
+    },
+    email: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
+})
 
-    const index = dbFornecedor.indexOf(fornecedorToUpdate)
-    dbFornecedor[index] = Fornecedor
-    return true
-}
+Fornecedor.hasMany(Compras)
 
-export const destroy = (id) => {
-    const Fornecedor = findByPk(id)
-    if(!Fornecedor) {
-        return false
-    }
-    const index = dbContato.indexOf(contato)
-    dbContato.splice(index, 1)
-    return true
-}
-
-export const findByPk = (id) => {
-    return dbFornecedor.find(Fornecedor => Fornecedor.id === id)
-}
-
-export const create = (Fornecedor) => {
-    Fornecedor.id = dbFornecedor.length + 1
-    dbFornecedor.push(Fornecedor)
-}
-
-export const findAll = () => {
-    return dbFornecedor
-}
-
-export const dbFornecedor = [
-    new Fornecedor('Empresa1', '1290392838392', '9999999999', '988888888', 'SP', 'Indaiatuba', 'Jardim', 'Av da Empresa', '33', 'empresa1@email.com'),
-]
-
+export default Fornecedor
