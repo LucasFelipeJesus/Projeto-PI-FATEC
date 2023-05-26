@@ -1,25 +1,29 @@
-import { Produto, findProdutoByPk, createModelProduto, destroyProduct, updateProduct, getAllProduct } from "../Models/ProdutoModel.js"
+import Produto from "../Models/ProdutoModel.js"
 
 class ProdutoController {
-    static getProduct(req, res) {
-        res.json(getAllProduct())
+    static async getProduct(req, res) {
+        const produto = await Produto.findAll()
+        res.json(produto)
     }
 
-    static createProduto(req, res){
+    static async procura(req, res){
+        
+    }
+
+    static async createProduto(req, res){
         const {descricao, fichaTecnica, unidadeMedida, tipoProduto, valorEntrada, valorVenda} = req.body
         if(!descricao || !fichaTecnica || !unidadeMedida || !tipoProduto || !valorEntrada || !valorVenda){
             res.status(400).json({error: "Informe todos os campos!"})
             return
         }
         
-        const produto = new Produto(0, descricao, fichaTecnica, unidadeMedida, tipoProduto, valorEntrada, valorVenda)
-        const createdProduto = createModelProduto(produto)
+        const createdProduto = await Produto.create(req.body)
         res.status(201).json(createdProduto)
     }
 
-    static getProdutoById(req, res){
+    static async getProdutoById(req, res){
         const id = parseInt(req.params.id)
-        const produto = findProdutoByPk(id)
+        const produto = await Produto.findByPk(id)
         if(!produto){
             res.status(404).json({error: "Não encontrado."})
             return
@@ -27,20 +31,20 @@ class ProdutoController {
         res.status(200).json(produto)
     }
 
-    static destroyProduto(req,res){
+    static async destroyProduto(req,res){
         const id = parseInt(req.params.id)
-        const produto = findProdutoByPk(id)
+        const produto = await Produto.findByPk(id)
         if(!produto){
             res.status(404).json({error: "Não encontrado."})
             return
         }
-        destroyProduct(id)
+        await Produto.destroy({where: {id: produto.id}})
         res.json({message: "Removido com sucesso!"})
     }
 
-    static updateProduto(req, res){
+    static async updateProduto(req, res){
         const id = parseInt(req.params.id)
-        const produto = findProdutoByPk(id)
+        const produto = await Produto.findByPk(id)
         if(!produto){
             res.status(404).json({error:"Não encontrado"})
             return
@@ -52,15 +56,8 @@ class ProdutoController {
             return
         }
 
-        produto.descricao = descricao
-        produto.fichaTecnica = fichaTecnica
-        produto.unidadeMedida = unidadeMedida
-        produto.tipoProduto = tipoProduto
-        produto.valorEntrada = Number(valorEntrada)
-        produto.valorVenda = Number(valorVenda)
-
-        updateProduct(id,produto)
-        res.json(produto)
+        const updatedProduto = await Produto.update({descricao, fichaTecnica, unidadeMedida, tipoProduto, valorEntrada, valorVenda}, {where: {id: produto.id}})
+        res.json(updatedProduto)
     }
 }
 

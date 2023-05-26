@@ -1,26 +1,70 @@
-import { Fornecedor, create, findAllFornecedor } from "../Models/FornecedorModel.js"
+import { Fornecedor, findAllFornecedor, create, findByPk, destroy, update } from "c:/Users/User/Desktop/PIC 2/Projeto-PI-FATEC/Controller/FornecedorController.js"
 
 class FornecedorController {
-    static listFornecedor(req,res){
+    static getFornecedor(req,res){
         res.json(findAllFornecedor())
     }
 
-
-
-    static find (req, res){
-        res.json(req.param)
-    }
-
     static createFornecedor(req,res){
-        const {nome, email, telefone} = req.body
-        if(!nome || !email || !telefone){
+        const {nome, cnpj, telefone, cep, estado, cidade, bairro, endereco, complemento, email} = req.body
+        if(!nome || !cnpj || !telefone || !cep || !estado || !cidade || !bairro || !endereco || !complemento || !email){
             res.status(400).json({error: "Informe todos os campos!"})
             return
         }
 
-        const fornecedor = new Fornecedor(0,nome,email,telefone)
+        const Fornecedor = new Fornecedor (nome, cnpj, telefone, cep, estado, cidade, bairro, endereco, complemento, email)
         create(Fornecedor)
         res.json(Fornecedor)
     }
+
+static getFornecedorById(req, res) {
+    const id = parseInt(req.params.id)
+    const Fornecedor = findByPk(id)
+    if(!Fornecedor) {
+        res.status(404).json({ error: 'Fornecedor não encontrado'})
+        return
+    }
+    res.json(Fornecedor)
 }
-export default FornecedorController
+
+static destroyFornecedor(req, res) {
+    const id = parseInt(req.params.id)
+    const Fornecedor = findByPk(id)
+    if(!Fornecedor) {
+        res.status(404).json ({message: 'Fornecedor não encontrado'})
+    }
+    destroy(id)
+    res.json({ message: 'Fornecedor removido com sucesso'})
+ }
+
+ static updateFornecedor(req, res) {
+    const id = parseInt(req.params.id)
+    const Fornecedor = findByPk(id)
+    if(!Fornecedor){
+        res.status(404).json ({ error: 'Fornecedor não encontrado'})
+    }
+ 
+
+ const { nome, cnpj, telefone, cep, estado, cidade, bairro, endereco, complemento, email } = req.body
+ if(!nome || !cnpj || !telefone || !cep || !estado || !cidade || !bairro || !endereco || !complemento || !email) {
+    res.status(400).json({error: 'Todos os campos são obrigatórios!'})
+    return
+ }
+
+    Fornecedor.nome = nome
+    Fornecedor.cnpj = cnpj
+    Fornecedor.telefone = telefone
+    Fornecedor.cep = cep
+    Fornecedor.estado = estado
+    Fornecedor.cidade = cidade
+    Fornecedor.bairro = bairro
+    Fornecedor.endereco = endereco
+    Fornecedor.complemento = complemento
+    Fornecedor.email = email
+
+    update(id,Fornecedor)
+    res.json(Fornecedor)
+}
+}
+
+    export default FornecedorController
