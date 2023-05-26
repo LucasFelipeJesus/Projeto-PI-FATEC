@@ -3,10 +3,10 @@ import detcomprasController from "../Controller/DetComprasController.js"
 
 const DetComprasRouter = express.Router()
 
-DetComprasRouter.get("/", DetComprasController.getDetCompras)
-DetComprasRouter.post("/", DetComprasController.createDetCompra)
-DetComprasRouter.get("/:id", DetComprasController.getdetCompraById)
-DetComprasRouter.delete("/:id", DetComprasController.destroydetCompra)
-DetComprasRouter.put("/:id", DetComprasController.updatedetCompra)
+DetComprasRouter.get("/", detcomprasController.getDetCompras)
+DetComprasRouter.post("/", detcomprasController.createDetCompra)
+DetComprasRouter.get("/:id", detcomprasController.getdetCompraById)
+DetComprasRouter.delete("/:id", detcomprasController.destroydetCompra)
+DetComprasRouter.put("/:id", detcomprasController.updatedetCompra)
 
 export default DetComprasRouter
