@@ -1,108 +1,111 @@
-import {
-    Vendas,
-    update,
-    destroy,
-    findByPk,
-    create,
-    findAllVendas,
-} from "../models/VendasModel.js"
+import { Venda, DetVenda, Cliente, Produto } from '../Models/Relacionamentos.js'
 
 class VendasController {
-    static getVenda(req, res) {
-        res.json(findAllVendas())
-    }
-
-    static createVenda(req, res) {
-        const {
-            idPedido,
-            idCliente,
-            nome,
-            cpf,
-            telefone,
-            dataPedido,
-            dataEntrega,
-            totalPedido,
-            formaPagamento,
-        } = req.body
-        if (!idPedido || !idCliente || !dataPedido) {
-            res.status(400).json({
-                error: "Cód. Pedido, Cod. Cliente e Data são obrigatórios",
+    static async getVendas(req, res) {
+        try {
+            const pedidoVenda = await Venda.findAll({
+                include: ['cliente', 'produtos'],
             })
-            return
+            return res.json(pedidoVenda)
+        } catch (err) {
+            console.log(err)
+            return res.status(500).json({ error: err.message })
         }
-
-        const pedidoVenda = new Vendas(
-            idPedido,
-            idCliente,
-            nome,
-            cpf,
-            telefone,
-            dataPedido,
-            dataEntrega,
-            totalPedido,
-            formaPagamento
-        )
-        create(pedidoVenda)
-        res.json(pedidoVenda)
     }
 
-    static getPedidoVendaById(req, res) {
-        const idPedido = parseInt(req.params.idPedido)
-        const pedidoVenda = findByPk(idPedido)
-        if (!pedidoVenda) {
-            res.status(404).json({ error: "Pedido de Venda não encontrado" })
-            return
-        }
-        res.json(pedidoVenda)
-    }
-
-    static destroyPedidoVenda(req, res) {
-        const idPedido = parseInt(req.params.idPedido)
-        const pedidoVenda = findByPk(idPedido)
-        if (!pedidoVenda) {
-            res.status(404).json({ error: "Pedido de Venda não encontrado" })
-            return
-        }
-        destroy(idPedido)
-        res.json({ message: "Pedido de Venda removido com sucesso" })
-    }
-
-    static updatePedidoVenda(req, res) {
-        const idPedido = parseInt(req.params.idPedido)
-        const pedidoVenda = findByPk(idPedido)
-        if (!pedidoVenda) {
-            res.status(404).json({ error: "Pedido de Venda não encontrado" })
-            return
-        }
-
-        const {
-            idCliente,
-            nome,
-            cpf,
-            telefone,
-            dataPedido,
-            dataEntrega,
-            totalPedido,
-            formaPagamento,
-        } = req.body
-        if (!idCliente || !dataPedido) {
-            res.status(400).json({
-                error: "Cod. Cliente e Data são obrigatórios",
+    static async getVendaById(req, res) {
+        try {
+            const pedidoVenda = await Venda.findByPk(req.params.id, {
+                include: ['cliente', 'produtos'],
             })
-            return
+            return res.json(pedidoVenda)
+        } catch (err) {
+            console.log(err)
+            return res
+                .status(404)
+                .json({ error: 'Pedido de Venda não encontrado' })
         }
+    }
 
-        pedidoVenda.idCliente = idCliente
-        pedidoVenda.nome = nome
-        pedidoVenda.cpf = cpf
-        pedidoVenda.telefone = telefone
-        pedidoVenda.dataPedido = dataPedido
-        pedidoVenda.dataEntrega = dataEntrega
-        pedidoVenda.totalPedido = totalPedido
-        pedidoVenda.formaPagamento = formaPagamento
+    static async createVenda(req, res) {
+        try {
+            const pedidoVenda = await Venda.create(req.body)
+            return res.json(pedidoVenda)
+        } catch (err) {
+            console.log(err)
+            return res
+                .status(400)
+                .json({ error: 'Informe todos os campos obrigatórios!' })
+        }
+    }
 
-        update(idPedido, pedidoVenda)
-        res.json(pedidoVenda)
+    static async destroyVenda(req, res) {
+        try {
+            const pedidoVenda = await Venda.findByPk(req.params.id)
+            await pedidoVenda.destroy()
+            return res.json({
+                message: 'Pedido de Venda removido com sucesso!',
+            })
+        } catch (err) {
+            console.log(err)
+            return res
+                .status(500)
+                .json({ error: 'Pedido de Venda não encontrado' })
+        }
+    }
+
+    static async updateVenda(req, res) {
+        try {
+            const pedidoVenda = await Venda.findByPk(req.params.id)
+            await pedidoVenda.update(req.body)
+            return res.json(pedidoVenda)
+        } catch (err) {
+            console.log(err)
+            return res.status(500).json({ error: err.message })
+        }
+    }
+
+    static async createDetVenda(req, res) {
+        try {
+            const pedidoVenda = await Venda.findByPk(req.params.id)
+            const produto = await Produto.findByPk(req.body.produtoId)
+            const newDetVenda = {
+                quantidade: req.body.quantidade,
+                personalizacao: req.body.personalizacao,
+                valorProduto: produto.valorVenda * req.body.quantidade,
+                vendaId: pedidoVenda.id,
+                produtoId: produto.id,
+            }
+            const detVenda = await DetVenda.create(newDetVenda)
+            pedidoVenda.valorTotal += detVenda.valorProduto
+            await pedidoVenda.save()
+            return res.json(detVenda)
+        } catch (err) {
+            console.log(err)
+            return res.status(500).json({ error: err.message })
+        }
+    }
+
+    static async destroyDetVenda(req, res) {
+        try {
+            const pedidoVenda = await Venda.findByPk(req.params.id)
+            const produto = await Produto.findByPk(req.body.produtoId)
+            const detVenda = await DetVenda.findOne({
+                where: {
+                    vendaId: pedidoVenda.id,
+                    produtoId: produto.id,
+                },
+            })
+            pedidoVenda.total -= detVenda.valorProduto
+            await pedidoVenda.save()
+            await detVenda.destroy()
+            return res.json({
+                message: 'Produto removido do Pedido de Venda com sucesso!',
+            })
+        } catch (err) {
+            console.log(err)
+            return res.status(500).json({ error: err.message })
+        }
     }
 }
 

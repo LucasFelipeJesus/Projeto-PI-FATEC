@@ -1,57 +1,52 @@
-import { Sequelize } from "sequelize"
-import db from "../db.js"
+import { Sequelize } from 'sequelize'
+import db from '../db.js'
 
-import Vendas from '../models/VendasModel.js'
-
-const Cliente = db.define('cliente',{
+const Cliente = db.define('cliente', {
     id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
-        primaryKey: true
+        primaryKey: true,
     },
     nome: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
     },
     cpf: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
     },
     telefone: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
     },
     cep: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
     },
     estado: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
     },
     cidade: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
     },
     bairro: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
     },
     endereco: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
     },
     complemento: {
         type: Sequelize.STRING,
-        allowNull: true
+        allowNull: true,
     },
-    email:{
+    email: {
         type: Sequelize.STRING,
-        allowNull: false
-    }
-    
+        allowNull: false,
+    },
 })
-
-Cliente.hasMany(Vendas)
 
 export default Cliente
