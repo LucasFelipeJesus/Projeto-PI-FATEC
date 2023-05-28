@@ -1,4 +1,4 @@
-import Fornecedor from "..Models/FornecedorModel.js"
+import { Fornecedor } from '../Models/Relacionamentos.js'
 
 class FornecedorController {
     static async getFornecedores(req, res) {
@@ -10,7 +10,7 @@ class FornecedorController {
         const id = parseInt(req.params.id)
         const fornecedor = await Fornecedor.findByPk(id)
         if (!fornecedor) {
-            res.status(404).json({ error: "Não encontrado" })
+            res.status(404).json({ error: 'Não encontrado' })
         }
         res.json(fornecedor)
     }
@@ -19,11 +19,11 @@ class FornecedorController {
         const id = parseInt(req.params.id)
         const fornecedor = await Fornecedor.findByPk(id)
         if (!fornecedor) {
-            res.status(404).json({ error: "Não encontrado" })
+            res.status(404).json({ error: 'Não encontrado' })
             return
         }
         await Fornecedor.destroy({ where: { id: fornecedor.id } })
-        res.json({ message: "Removido com sucesso!" })
+        res.json({ message: 'Removido com sucesso!' })
     }
 
     static async createFornecedor(req, res) {
@@ -51,7 +51,7 @@ class FornecedorController {
             !email
         ) {
             res.status(400).json({
-                error: "Informe todos os campos obrigatórios!",
+                error: 'Informe todos os campos obrigatórios!',
             })
             return
         }
@@ -64,7 +64,7 @@ class FornecedorController {
         const id = parseInt(req.params.id)
         const fornecedor = await Fornecedor.findByPk(id)
         if (!fornecedor) {
-            res.status(404).json({ error: "Não encontrado" })
+            res.status(404).json({ error: 'Não encontrado' })
             return
         }
 
@@ -92,7 +92,7 @@ class FornecedorController {
             !email
         ) {
             res.status(400).json({
-                error: "Informe todos os campos obrigatórios!",
+                error: 'Informe todos os campos obrigatórios!',
             })
             return
         }

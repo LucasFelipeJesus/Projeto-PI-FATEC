@@ -1,14 +1,8 @@
-import { Sequelize } from "sequelize";
+import { Sequelize } from 'sequelize'
 
-const db = new Sequelize(
-    "database",
-    "user",
-    "passw",
-    {
-        dialect: "sqlite",
-        storage: './db.sqlite'
-    }
-
-)
+const db = new Sequelize('database', 'user', 'passw', {
+    dialect: 'sqlite',
+    storage: './db.sqlite',
+})
 
 export default db

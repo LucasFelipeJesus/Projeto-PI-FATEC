@@ -1,8 +1,7 @@
-import { Sequelize } from "sequelize"
-import db from "../db.js"
-import Compras from "../models/ComprasModel.js"
+import { Sequelize } from 'sequelize'
+import db from '../db.js'
 
-const Fornecedor = db.define("fornecedor", {
+const Fornecedor = db.define('fornecedor', {
     id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -49,7 +48,5 @@ const Fornecedor = db.define("fornecedor", {
         allowNull: false,
     },
 })
-
-Fornecedor.hasMany(Compras)
 
 export default Fornecedor
