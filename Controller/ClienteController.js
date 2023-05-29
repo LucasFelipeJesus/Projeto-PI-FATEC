@@ -1,4 +1,4 @@
-import { Cliente } from '../Models/Relacionamentos.js'
+import { Cliente } from "../Models/Relacionamentos.js"
 
 class ClienteController {
     static async getClientes(req, res) {
@@ -31,7 +31,7 @@ class ClienteController {
             !email
         ) {
             res.status(400).json({
-                error: 'Informe todos os campos obrigatórios!',
+                error: "Informe todos os campos obrigatórios!",
             })
             return
         }
@@ -44,7 +44,7 @@ class ClienteController {
         const id = parseInt(req.params.id)
         const cliente = await Cliente.findByPk(id)
         if (!cliente) {
-            res.status(404).json({ error: 'Não encontrado.' })
+            res.status(404).json({ error: "Não encontrado." })
             return
         }
         res.status(200).json(cliente)
@@ -54,18 +54,18 @@ class ClienteController {
         const id = parseInt(req.params.id)
         const cliente = await Cliente.findByPk(id)
         if (!cliente) {
-            res.status(404).json({ error: 'Não encontrado.' })
+            res.status(404).json({ error: "Não encontrado." })
             return
         }
         await Cliente.destroy({ where: { id: cliente.id } })
-        res.json({ message: 'Removido com sucesso!' })
+        res.json({ message: "Removido com sucesso!" })
     }
 
     static async updateCliente(req, res) {
         const id = parseInt(req.params.id)
         const cliente = await Cliente.findByPk(id)
         if (!cliente) {
-            res.status(404).json({ error: 'Não encontrado' })
+            res.status(404).json({ error: "Não encontrado" })
             return
         }
 
@@ -93,7 +93,7 @@ class ClienteController {
             !email
         ) {
             res.status(400).json({
-                error: 'Informe todos os campos obrigatórios!',
+                error: "Informe todos os campos obrigatórios!",
             })
             return
         }
