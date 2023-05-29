@@ -77,7 +77,7 @@ class VendasController {
                 produtoId: produto.id,
             }
             const detVenda = await DetVenda.create(newDetVenda)
-            pedidoVenda.valorTotal += detVenda.valorProduto
+            pedidoVenda.totalPedido += detVenda.valorProduto
             await pedidoVenda.save()
             return res.json(detVenda)
         } catch (err) {
@@ -96,7 +96,7 @@ class VendasController {
                     produtoId: produto.id,
                 },
             })
-            pedidoVenda.total -= detVenda.valorProduto
+            pedidoVenda.totalPedido -= detVenda.valorProduto
             await pedidoVenda.save()
             await detVenda.destroy()
             return res.json({
