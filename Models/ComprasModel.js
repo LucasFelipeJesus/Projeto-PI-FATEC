@@ -1,7 +1,7 @@
-import { Sequelize } from 'sequelize'
-import db from '../db.js'
+import { Sequelize } from "sequelize"
+import db from "../db.js"
 
-const Compra = db.define('compra', {
+const Compra = db.define("compra", {
     id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -17,7 +17,7 @@ const Compra = db.define('compra', {
     },
     totalPedido: {
         type: Sequelize.DECIMAL(10, 2),
-        allowNull: false,
+        allowNull: true,
     },
     formaPagamento: {
         type: Sequelize.STRING,
